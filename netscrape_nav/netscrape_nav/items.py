@@ -12,9 +12,11 @@ further processing and export in pipelines.py
 Doesn't run on it's own; is accessed from iGEMScraper.py when running the command
 '''
 
+from scrapy_djangoitem import DjangoItem
+from SAMARADeployment.software.models import DjangoWikiPage
 import scrapy
 
-class WikiPage(scrapy.Item):
+class WikiPage(DjangoItem):
     '''
     Creates a WikiPage Item to help format output using the pipeline in pipelines.py
 
@@ -26,7 +28,8 @@ class WikiPage(scrapy.Item):
         year (str): identifies the year of competition of the team (see getYear)
         pagetext (str): the body content of the wiki page (see getPagetext)
 
-    '''  
+    '''
+    django_model = DjangoWikiPage
     url = scrapy.Field()
     pagetype = scrapy.Field()
     teamname = scrapy.Field()

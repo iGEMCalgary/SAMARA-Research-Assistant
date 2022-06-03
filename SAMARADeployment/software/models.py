@@ -1,6 +1,6 @@
 from django.db import models
 
-class WikiPage(models.Model):
+class DjangoWikiPage(models.Model):
     
     url = models.CharField(max_length=300)
     pagetype = models.CharField(max_length=10)
