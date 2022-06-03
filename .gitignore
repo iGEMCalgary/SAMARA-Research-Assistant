@@ -2,3 +2,4 @@ SAMARAVenv/
 iGEMScraperVENV/
 samara.*
 *.log
+*.env
