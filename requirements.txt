@@ -1,4 +1,7 @@
+Django==4.0.5
 lxml==4.8.0
 parsel==1.6.0
+python-dotenv==0.20.0
 regex==2022.4.24
 Scrapy==2.6.1
+scrapy-djangoitem==1.1.1
