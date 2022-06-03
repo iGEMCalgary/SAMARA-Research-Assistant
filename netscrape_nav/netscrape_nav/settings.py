@@ -7,6 +7,14 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
+import sys
+import os
+import django
+
+sys.path.insert(0,'/Desktop/SAMARA-Research-Assistant/SAMARADeployment')
+os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
+django.setup()
+
 BOT_NAME = 'netscrape_nav'
 
 SPIDER_MODULES = ['netscrape_nav.spiders']
