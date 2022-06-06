@@ -11,8 +11,8 @@ import sys
 import os
 import django
 
-sys.path.insert(0,'/Desktop/SAMARA-Research-Assistant/SAMARADeployment')
-os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
+sys.path.append('C:/Users/ahmed/Desktop/SAMARA-Research-Assistant/SAMARADeployment')
+os.environ['DJANGO_SETTINGS_MODULE'] = 'SAMARADeployment.settings'
 django.setup()
 
 BOT_NAME = 'netscrape_nav'

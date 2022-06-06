@@ -13,7 +13,7 @@ Doesn't run on it's own; is accessed from iGEMScraper.py when running the comman
 '''
 
 from scrapy_djangoitem import DjangoItem
-from SAMARADeployment.software.models import DjangoWikiPage
+from software.models import DjangoWikiPage
 import scrapy
 
 class WikiPage(DjangoItem):
