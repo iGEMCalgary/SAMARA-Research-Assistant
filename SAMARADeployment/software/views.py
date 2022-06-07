@@ -8,6 +8,10 @@ class SoftwarePageListView(generic.ListView):
 def index(request):
     return HttpResponse("Hello, world. You're at software, punk.")
 
+class softwarelist(generic.list.ListView):
+    model = DjangoWikiPage
+
+
 def softpage(request):
     for i in range(1, DjangoWikiPage.objects.count() + 1):
         page = DjangoWikiPage.objects.get(pk=i)
