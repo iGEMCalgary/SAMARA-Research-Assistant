@@ -8,6 +8,8 @@ class DjangoWikiPage(models.Model):
     year = models.CharField(max_length=4)
     pagetext = models.TextField()
 
+    def __str__(self):
+        return self.url
 
 
 # Create your models here.
