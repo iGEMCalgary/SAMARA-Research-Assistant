@@ -1,27 +1,30 @@
-<html>
-    <div>
-        {% for object in object_list %}
-            {% if forloop.first %}
-            <div class="row">
-            {% endif %}
-            <div class="col-md-4">
-                <a href="/object/details/{{object.id}}">
-                    <div class="col-12 square">
-                        <p class="preview"><span class="preview-title">{{object.url}}</span></p>
-                        <!-- <div class="preview-info">{{object.description|truncatewords:20|slice:":-4"|safe}} . . .</div> -->
-                        <div class="preview-info">{{object.pagetext|truncatewords:20|safe}}</div>
-                        <div class="preview-info">{{object.teamname}}</div>
-                    </div>
-                </a>
-            </div>
-        {% if forloop.counter|divisibleby:3 %}
-        </div>
-        <br>
+{% extends 'software/frame.html' %}
+
+{% block content %}
+
+<div>
+    {% for object in object_list %}
+        {% if forloop.first %}
         <div class="row">
         {% endif %}
-        {% if forloop.last %}
-        </div>  
-        {% endif %}
-    {% endfor %}
+        <div class="col-md-4">
+            <a href="/object/details/{{object.id}}">
+                <div class="col-12 square">
+                    <p class="preview"><span class="preview-title">{{object.url}}</span></p>
+                    <!-- <div class="preview-info">{{object.description|truncatewords:20|slice:":-4"|safe}} . . .</div> -->
+                    <div class="preview-info">{{object.pagetext|truncatewords:20|safe}}</div>
+                    <div class="preview-info">{{object.teamname}}</div>
+                </div>
+            </a>
+        </div>
+    {% if forloop.counter|divisibleby:3 %}
     </div>
-</html>
+    <br>
+    <div class="row">
+    {% endif %}
+    {% if forloop.last %}
+    </div>  
+    {% endif %}
+{% endfor %}
+</div>
+{% endblock %}
