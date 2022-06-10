@@ -10,6 +10,10 @@ def index(request):
 
 class softwarelist(generic.list.ListView):
     model = DjangoWikiPage
+    
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(pagetype='Software')
 
 
 def softpage(request):
