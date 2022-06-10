@@ -59,7 +59,8 @@ class KeystoneXL:
         
         
         scraped_data['pagetext'] = re.sub(r'\$\$.+?\$\$', '', scraped_data['pagetext']) # Removes equations from the exported data
-        
+        scraped_data['pagetext'] = re.sub(r'\$.+?\$', '', scraped_data['pagetext']) # Removes equations from the exported data
+
         item.save()
         self.exporter.export_item(item) # Exports the item to the file specified
         return item 
