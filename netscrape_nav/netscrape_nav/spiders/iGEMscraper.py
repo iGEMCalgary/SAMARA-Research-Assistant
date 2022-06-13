@@ -26,7 +26,7 @@ import re
 from lxml import html
 from lxml.html.clean import Cleaner
 from parsel import Selector
-from netscrape_nav.items import WikiPage
+from netscrape_nav.items import SoftwareWikiPage, ModelWikiPage
 
 
 def getTeamname(url):
@@ -184,7 +184,7 @@ class iGEMSpider(CrawlSpider):
                 year (str): identifies the year of competition of the team (see getYear)
                 pagetext (str): the body content of the wiki page (see getPagetext)
         '''
-        page = WikiPage()   # Use scrapy item objects to more accurately follow established standards 
+        page = ModelWikiPage()   # Use scrapy item objects to more accurately follow established standards 
                             # For more info, see the items.py file or the scrapy documentation
         
         page['url'] = str(response.url)
@@ -212,7 +212,7 @@ class iGEMSpider(CrawlSpider):
                     year (str): identifies the year of competition of the team (see getYear)
                     pagetext (str): the body content of the wiki page (see getPagetext)
         '''
-        page = WikiPage()   # Use scrapy item objects to more accurately follow existing convention 
+        page = SoftwareWikiPage()   # Use scrapy item objects to more accurately follow existing convention 
                             # For more info, see the items.py file or review the scrapy documentation
         
         page['url'] = str(response.url)

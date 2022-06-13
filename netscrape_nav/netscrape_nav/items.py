@@ -13,10 +13,11 @@ Doesn't run on it's own; is accessed from iGEMScraper.py when running the comman
 '''
 
 from scrapy_djangoitem import DjangoItem
-from software.models import DjangoWikiPage
+from software.models import DjangoSoftwareWikiPage
+from model.models import DjangoModelWikiPage
 import scrapy
 
-class WikiPage(DjangoItem):
+class SoftwareWikiPage(DjangoItem):
     '''
     Creates a WikiPage Item to help format output using the pipeline in pipelines.py
 
@@ -29,13 +30,32 @@ class WikiPage(DjangoItem):
         pagetext (str): the body content of the wiki page (see getPagetext)
 
     '''
-    django_model = DjangoWikiPage
+    django_model = DjangoSoftwareWikiPage
     url = scrapy.Field()
     pagetype = scrapy.Field()
     teamname = scrapy.Field()
     year = scrapy.Field()
     pagetext = scrapy.Field()
 
+class ModelWikiPage(DjangoItem):
+    '''
+    Creates a WikiPage Item to help format output using the pipeline in pipelines.py
+
+    Fields:
+        url (str): the url of the software/modelling page
+        pagetype (str): a string identifying if the page is a software or modelling page
+                        in order to help filter them down the line
+        teamname (str): identifies the team that created the page (see getTeamname)
+        year (str): identifies the year of competition of the team (see getYear)
+        pagetext (str): the body content of the wiki page (see getPagetext)
+
+    '''
+    django_model = DjangoModelWikiPage
+    url = scrapy.Field()
+    pagetype = scrapy.Field()
+    teamname = scrapy.Field()
+    year = scrapy.Field()
+    pagetext = scrapy.Field()
 
 class NetscrapeNavItem(scrapy.Item): # Default item object; can just ignore because it's probably not important
     # define the fields for your item here like:
