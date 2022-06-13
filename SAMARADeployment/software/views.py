@@ -10,12 +10,12 @@ def index(request):
 
 class SoftwareList(generic.list.ListView):
     model = DjangoSoftwareWikiPage
-    template_name = 'softwarelist.html'
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        return queryset.filter(pagetype='Software')
+    template_name = 'pagelist.html'
+    # def get_queryset(self):
+    #     queryset = super().get_queryset()
+    #     return queryset.filter(pagetype='Software')
 
 
-class DetailSoftPage(generic.DetailView):
+class SoftwareDetailPage(generic.DetailView):
     model = DjangoSoftwareWikiPage
-    template_name = 'detailsoftwarepage.html'
+    template_name = 'detailpage.html'

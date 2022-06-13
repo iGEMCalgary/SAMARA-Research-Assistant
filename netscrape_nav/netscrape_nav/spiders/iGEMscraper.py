@@ -188,7 +188,7 @@ class iGEMSpider(CrawlSpider):
                             # For more info, see the items.py file or the scrapy documentation
         
         page['url'] = str(response.url)
-        page['pagetype'] = 'Model'
+        page['pagetype'] = 'model'
         page['teamname'] = getTeamname(page['url'])
         page['year'] = getYear(page['url'])
         clean_html = cleanHTML(str(response.text))
@@ -216,7 +216,7 @@ class iGEMSpider(CrawlSpider):
                             # For more info, see the items.py file or review the scrapy documentation
         
         page['url'] = str(response.url)
-        page['pagetype'] = 'Software'
+        page['pagetype'] = 'software'
         page['teamname'] = getTeamname(page['url'])
         page['year'] = getYear(page['url'])
         clean_html = cleanHTML(str(response.text))

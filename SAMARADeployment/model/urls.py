@@ -4,6 +4,6 @@ from . import views
 
 urlpatterns = [
     path('', views.ModelList.as_view(), name='model_list'),
-    path('<int:pk>', views.DetailSoftPage.as_view(), name='software_page'),
+    path('<int:pk>/', views.ModelDetailPage.as_view(), name='model_page'),
 
 ]
