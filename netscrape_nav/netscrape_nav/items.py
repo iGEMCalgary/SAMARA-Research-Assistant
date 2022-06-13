@@ -11,11 +11,12 @@ further processing and export in pipelines.py
 
 Doesn't run on it's own; is accessed from iGEMScraper.py when running the command
 '''
-
+import scrapy
 from scrapy_djangoitem import DjangoItem
+# Get the Django Models from the SAMARADeployment file
 from software.models import DjangoSoftwareWikiPage
 from model.models import DjangoModelWikiPage
-import scrapy
+
 
 class SoftwareWikiPage(DjangoItem):
     '''
@@ -30,7 +31,7 @@ class SoftwareWikiPage(DjangoItem):
         pagetext (str): the body content of the wiki page (see getPagetext)
 
     '''
-    django_model = DjangoSoftwareWikiPage
+    django_model = DjangoSoftwareWikiPage   # Tells the program which Django Model to use
     url = scrapy.Field()
     pagetype = scrapy.Field()
     teamname = scrapy.Field()
@@ -50,7 +51,7 @@ class ModelWikiPage(DjangoItem):
         pagetext (str): the body content of the wiki page (see getPagetext)
 
     '''
-    django_model = DjangoModelWikiPage
+    django_model = DjangoModelWikiPage  # Tells the program which Django Model to use
     url = scrapy.Field()
     pagetype = scrapy.Field()
     teamname = scrapy.Field()
