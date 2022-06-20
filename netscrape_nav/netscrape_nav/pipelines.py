@@ -28,54 +28,68 @@ import re
 import torch
 
 
-nltk.download('punkt')
-checkpoint = "sshleifer/distilbart-cnn-12-6"
+nltk.download('punkt')  # Downloads the Punkt tokenizer model
+checkpoint = "sshleifer/distilbart-cnn-12-6"  # This is the path for the model used (in reference to transformers)
 device = 'cuda:0' if torch.cuda.is_available() else 'cpu' # Checks if the device has a GPU present to speed up summarizer; if you don't, you just get slow CPU summarization. I would really, really, really recommend using GPU summarization.
 
-tokenizer = AutoTokenizer.from_pretrained(checkpoint)
-model = AutoModelForSeq2SeqLM.from_pretrained(checkpoint).to(device)
+tokenizer = AutoTokenizer.from_pretrained(checkpoint) 
+model = AutoModelForSeq2SeqLM.from_pretrained(checkpoint).to(device)  # Sets the model and sends it to the GPU/CPU depending on the device parameter
 
-#Summarizer using the 'distilbart-cnn-12-6' pretrained model
 def generate_summary(text):
-  # tokenize the text into sentences
-  sentences = nltk.tokenize.sent_tokenize(text)
-  # initialize
+  '''
+    Summarizes the input text using PyTorch and the DistilBART CNN 12-6 pretrained model 
+    provided by transformers.
+
+    Arguments:
+        text (str): the text content of the page you want summarized.
+
+    Returns:
+        compiled_summary (str): the summarized version of the page.
+    '''
+
+  sentences = nltk.tokenize.sent_tokenize(text) # Tokenize the text into sentences (list)
+  # Initialize values/parameters
   length = 0
   chunk = ""
   chunks = []
   count = -1
+
   for sentence in sentences:
     count += 1
-    combined_length = len(tokenizer.tokenize(sentence)) + length # add the no. of sentence tokens to the length counter
+    combined_length = len(tokenizer.tokenize(sentence)) + length  # Add the number of sentence tokens to the length counter
 
-    if combined_length  <= tokenizer.max_len_single_sentence: # if it doesn't exceed
-      chunk += sentence + " " # add the sentence to the chunk
-      length = combined_length # update the length counter
+    if combined_length  <= tokenizer.max_len_single_sentence: # If it doesn't exceed the maximum sentence length
+      chunk += sentence + " "   # Add the sentence to the chunk
+      length = combined_length  # Update the length counter
 
-      # if it is the last sentence
+      # If it is the last sentence
       if count == len(sentences) - 1:
-        chunks.append(chunk.strip()) # save the chunk
+        chunks.append(chunk.strip())  # Save the chunk
       
     else: 
-      chunks.append(chunk.strip()) # save the chunk
+      chunks.append(chunk.strip())    # Save the chunk
       
-      # reset 
+      # Reset the parameters
       length = 0 
       chunk = ""
 
-      # take care of the overflow sentence
+      # Take care of the overflow sentence
       chunk += sentence + " "
       length = len(tokenizer.tokenize(sentence))
   len(chunks)
-  # inputs to the model
+
+  # Inputs to the model
   inputs = [tokenizer(chunk, return_tensors="pt", max_length=1024, truncation=True).to(device) for chunk in chunks]
+  
   compiled_summary = ''
-  #for every chunk of the tokenized text
+  
+  # For every chunk of the tokenized text
   for input in inputs:
-    #generate the summary
+    # Generate the summary
     output = model.generate(**input)
-    #add each chunk of summary to a string
+    # Add each chunk of summary to a string
     compiled_summary = compiled_summary + tokenizer.decode(*output, skip_special_tokens=True)
+
   return compiled_summary   
 
 class KeystoneXL:
