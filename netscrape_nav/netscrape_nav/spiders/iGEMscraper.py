@@ -145,10 +145,10 @@ class iGEMSpider(CrawlSpider):
     rules = (
         
         # First rule looks for pages with the word Mode + following characters in the URL in order to get pages with Model, Modelling, and Modelling. The pages that match the criteria get callbacked to parse_model_page
-        Rule(LinkExtractor(allow=(r'Mode\w+')), callback='parse_model_page'), 
+        Rule(LinkExtractor(allow=(r'Mode\w+'), deny=('index',)), callback='parse_model_page'), 
         
         # Second rule looks for pages with the word /Software in the URL in order to to avoid teams with software in the name. The pages that match the criteria get callbacked to parse_soft_page
-        Rule(LinkExtractor(allow=(r'/Software')), callback='parse_soft_page'),
+        Rule(LinkExtractor(allow=(r'/Software'), deny=('index',)), callback='parse_soft_page'),
 
         # Final rule looks for pages with the word Team: in the URL, while denying pages that got the crawler in an infinite loop. There is no callback, allowing the crawler to use these pages to find new links.
         # We've also excluded pages that we don't want to scrape (to decrease scaping times). If modifying, ensure that the pages you want aren't included in this list.

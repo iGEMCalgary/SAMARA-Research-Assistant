@@ -22,13 +22,18 @@ from scrapy.exporters import JsonLinesItemExporter
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 import nltk
 import re
+# Optional parameter to allow for debugging while running from scrapy. Not necessary unless something has gone terribly wrong.
+# import os
+# # os.environ['CUDA_LAUNCH_BLOCKING'] = "1"
+import torch
 
 
 nltk.download('punkt')
 checkpoint = "sshleifer/distilbart-cnn-12-6"
+device = 'cuda:0' if torch.cuda.is_available() else 'cpu' # Checks if the device has a GPU present to speed up summarizer; if you don't, you just get slow CPU summarization. I would really, really, really recommend using GPU summarization.
 
 tokenizer = AutoTokenizer.from_pretrained(checkpoint)
-model = AutoModelForSeq2SeqLM.from_pretrained(checkpoint)
+model = AutoModelForSeq2SeqLM.from_pretrained(checkpoint).to(device)
 
 #Summarizer using the 'distilbart-cnn-12-6' pretrained model
 def generate_summary(text):
@@ -63,7 +68,7 @@ def generate_summary(text):
       length = len(tokenizer.tokenize(sentence))
   len(chunks)
   # inputs to the model
-  inputs = [tokenizer(chunk, return_tensors="pt") for chunk in chunks]
+  inputs = [tokenizer(chunk, return_tensors="pt", max_length=1024, truncation=True).to(device) for chunk in chunks]
   compiled_summary = ''
   #for every chunk of the tokenized text
   for input in inputs:
@@ -94,7 +99,6 @@ class KeystoneXL:
     def process_item(self, item, spider):   # Runs when an item is yielded in iGEMScraper.py
         
         scraped_data = ItemAdapter(item)    # Adapts the item into a dict-like ItemAdapter object to process
-
         strings_to_check_for = ['No Page Text', # A list of strings found in false-positive, empty pages
                             'The requested page title was invalid', 
                             'This page is used by the judges to evaluate your team',
@@ -108,7 +112,6 @@ class KeystoneXL:
         
         if len(scraped_data['pagetext']) < 100: # Checks to ensure the page has sufficient content
             raise DropItem('Page too short')    # If any pagetext too short, drop the item, stop processing, and do not export
-        
         
         scraped_data['pagetext'] = re.sub(r'\$\$.+?\$\$', '', scraped_data['pagetext']) # Removes equations from the exported data
         scraped_data['pagetext'] = re.sub(r'\$.+?\$', '', scraped_data['pagetext']) # Removes equations from the exported data
