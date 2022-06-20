@@ -32,9 +32,9 @@ The program is run through the terminal. In order to do so, we must first naviga
   
 We can then run the scraper itself using the following command:  
   
-`scrapy crawl tomholland --logfile scraper.log`  
+`scrapy crawl tomholland`  
 
-This command can be somewhat modified to suit your needs and documentation to do so is available on the [Scrapy docs](https://docs.scrapy.org/en/latest/index.html). By default, the project will output to a file named samara.jl, located in the first netscrape_nav folder.
+This command can be somewhat modified to suit your needs and documentation to do so is available on the [Scrapy docs](https://docs.scrapy.org/en/latest/index.html). By default, the project will output to a file named samara.jl, located in the first netscrape_nav folder. This is to allow for the scraped items to be used seperately from the Django deployment. The project will also save each scraped object to the db.sqlite3 file inside the SAMARADeployment folder, allowing Django to access the information.
 
 ## Modification
 
@@ -43,16 +43,20 @@ This command can be somewhat modified to suit your needs and documentation to do
 As a default, the program scrapes any page that contains Software or Mode* in the URL. To change the pages scraped, you must first create a Link Extractor rule (in iGEMScraper.py) to parse the URL for certain keywords. Certain pages are standardized amongst iGEM teams and thus, are simpler to create rules for. Regular Expressions may be used to create wildcard rules to help increase the scope of the scraper for more inconsistant page namings (see rule #2 and the [RegularExpressions documentation](https://docs.python.org/3/library/re.html) for more information and examples of their usage). 
 
 ### Item Processing
-  
-Item processing begins in the items.py file, with the defining of a WikiPage Item object. An Item object is a dictionary-like object that allows for information to remain organized and catagorized. The existing WikiPage Item *should* be sufficent for scraping iGEM wiki pages, but if necessary, it can be easily modified to accept different parameters.
 
-The second step involves post processing in the pipelines.py file. While some preliminary processing is done before creating a WikiPage Item (in iGEMScraper.py), we further process it here to remove unwanted characteristics from the scraped text. This step is easily expanded on, with additional processing steps being a few lines of code away.
+Item processing begins in the items.py file, with the defining of a DjangoItem WikiPage object for each Django "model" item. Each item in the file should correspond to a Django app model, as defined in each app's model.py file. A scrapy-djangoitem DjangoItem object functions near identically to a standard scrapy Item object; both are dictionary-like objects that allow for information to remain organized and catagorized. Each existing WikiPage Item *should* be sufficent for scraping iGEM wiki pages, but if necessary, it can be easily modified to accept different parameters. The process to add a scraper parameter is as follows:
+
+1. Create a new Django app for the page type you wish to scrape
+2. Create a models.py file inside of the new app folder and define the model. The existing models.py files inside of the "software" and "model" folders may serve as good examples for model definitions.
+3. Define the items in the netscrape_nav/netscrape_nav/items.py file. Make sure to import the created models and to define each DjangoItem as terms of one (using the django_model variable).
+
+The second step involves post processing in the pipelines.py file. While some preliminary processing is done before creating a WikiPage Item (in netscrape_nav/netscrape_nav/iGEMScraper.py), we further process it here to remove unwanted characteristics from the scraped text. This file also contains the summarizer model, processing the pagetext into a useful summary. This step can be easily expanded on, with additional processing steps being a few lines of code away.
   
 This step also includes the removal of default or unpopulated wiki pages, pages that do not follow standard iGEM convention, and other broken or otherwise unusable pages. 
 
 ### Exporting
   
-Exporting is also done through the pipelines.py file. By default, the scraper will use the JsonLinesItemExporter provided by Scrapy. This will export the pages as a .jl file. If changing the export format is desired or if the existing functionality is simply not enough, one may use the Scrapy [Item Exporters](https://docs.scrapy.org/en/latest/topics/exporters.html) and the [Item Pipeline](https://docs.scrapy.org/en/latest/topics/item-pipeline.html) docs to customize the functionality of the exporter.
+Exporting is also done through the pipelines.py file. By default, the scraper will use the JsonLinesItemExporter provided by Scrapy. This will export the pages as a .jl file. If changing the export format is desired or if the existing functionality is simply not enough, one may use the Scrapy [Item Exporters](https://docs.scrapy.org/en/latest/topics/exporters.html) and the [Item Pipeline](https://docs.scrapy.org/en/latest/topics/item-pipeline.html) docs to customize the functionality of the exporter. As part of the Djagno integration, the project also exports the files as an sqlite3 file. Functionality for using these files is built into Django, though you may use any SQL tool to process the data within it.
   
 ## License
 The code is provided under the MIT license.
