@@ -7,7 +7,8 @@ The information is extracted using the scraper, summarized using the [DistilBART
 ## Installation
 
 1. Download the files from the repository
-2. Create a virtual environment and run the following command from inside the virtual environment to install the required packages:  
+2. Create a virtual environment and run the following commands from inside the virtual environment to install the required packages:
+`pip install torch --extra-index-url https://download.pytorch.org/whl/cu113`
 `pip install -r requirements.txt`  
   
 A brief overview of the major packages installed and their usage in the program are listed below:
