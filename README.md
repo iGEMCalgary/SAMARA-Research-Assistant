@@ -1,9 +1,11 @@
 # SAMARA iGEM Research Assistant
-## iGEMScraper
+
+A comprehensive tool to parse through the software and modelling pages of various iGEM teams. The project serves as a Django-based front-end deployment of the initial [iGEMScraper](https://github.com/iGEMCalgary/iGEMScraper) module.
+ The information is extracted using the scraper, summarized using the DistilBART CNN 12-6
 
 A web scraper created using python and scrapy in order to automatically visit, parse, and extract information from iGEM wiki pages. The scraper
 was designed as the first component of the larger SAMARA Research Assistant project. However, in order to keep it accessible to other teams, it
-has also been released as a standalone module, allowing other teams to  easily scrape iGEM wiki pages using their own parameters.
+has also been released as a standalone module, allowing other teams to easily scrape iGEM wiki pages using their own parameters.
 
 ## Installation
 
