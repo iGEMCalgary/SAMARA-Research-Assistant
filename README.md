@@ -1,11 +1,8 @@
 # SAMARA iGEM Research Assistant
 
-A comprehensive tool to parse through the software and modelling pages of various iGEM teams. The project serves as a Django-based front-end deployment of the initial [iGEMScraper](https://github.com/iGEMCalgary/iGEMScraper) module.
- The information is extracted using the scraper, summarized using the [DistilBART CNN 12-6](https://huggingface.co/sshleifer/distilbart-cnn-12-6) model, and then passed to a django database using the [scrapy-djangoitem](https://github.com/scrapy-plugins/scrapy-djangoitem) plugin. From there, it is deployed using standard Django features onto the [site here]().
+A comprehensive tool to parse through the software and modelling pages of various iGEM teams. The project serves as a Django-based front-end deployment of the initial [iGEMScraper](https://github.com/iGEMCalgary/iGEMScraper) module. This project is heavily inspired by iGEM Calgary's 2018 project [SARA](https://github.com/iGEMCalgary/research-assistant). The project aims to expand upon SARA by fully automating the scraper-to-deployment pipeline while also increasing the scope of the project by including modelling pages.
 
-A web scraper created using python and scrapy in order to automatically visit, parse, and extract information from iGEM wiki pages. The scraper
-was designed as the first component of the larger SAMARA Research Assistant project. However, in order to keep it accessible to other teams, it
-has also been released as a standalone module, allowing other teams to easily scrape iGEM wiki pages using their own parameters.
+The information is extracted using the scraper, summarized using the [DistilBART CNN 12-6](https://huggingface.co/sshleifer/distilbart-cnn-12-6) model, and then passed to a Django database using the [scrapy-djangoitem](https://github.com/scrapy-plugins/scrapy-djangoitem) plugin. From there, it is deployed using standard Django features onto the [site here]().
 
 ## Installation
 
@@ -13,7 +10,7 @@ has also been released as a standalone module, allowing other teams to easily sc
 2. Create a virtual environment and run the following command from inside the virtual environment to install the required packages:  
 `pip install -r requirements.txt`  
   
-A brief overview of the packages installed and their usage in the progream are listed below:
+A brief overview of the major packages installed and their usage in the program are listed below:
 
 | Library/Module | Usage |
 | -------------- | ----- |
@@ -21,6 +18,11 @@ A brief overview of the packages installed and their usage in the progream are l
 | RegEx | Allows for string processing and the usage of wildcard text patterns. |
 | lxml | Allows for HTML processing and cleaning to help sanitize scraping outcomes. |
 | parsel | Adds CSS selectors to extract text from the html page body. |
+| Django | Creates a python-based deployment of the scraped pages. |
+| scrapy-djangoitem | Allows for Scrapy to interface with and output Django model items. |
+| nltk | Tokenizes the sentances for use with the DistilBART CNN 12-6 model. |
+| transformers | Provides access to the DistilBART CNN 12-6 model. |
+| PyTorch | Requirement to use the DistilBART CNN 12-6 model. Also allows access to CUDA-based summarization. |
 
 ## Usage
 
