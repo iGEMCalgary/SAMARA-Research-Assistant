@@ -176,7 +176,7 @@ class iGEMSpider(CrawlSpider):
             response (Response): the response given by the Scrapy request
 
         Yields:
-            WikiPage Item -> file (see initial documentation, items.py, pipelines.py):
+            ModelWikiPage Item -> file (see initial documentation, items.py, pipelines.py):
                 url (str): the url of the software/modelling page
                 pagetype (str): a string identifying if the page is a software or modelling page
                                 in order to help filter them down the line
@@ -184,8 +184,8 @@ class iGEMSpider(CrawlSpider):
                 year (str): identifies the year of competition of the team (see getYear)
                 pagetext (str): the body content of the wiki page (see getPagetext)
         '''
-        page = ModelWikiPage()   # Use scrapy item objects to more accurately follow established standards 
-                            # For more info, see the items.py file or the scrapy documentation
+        page = ModelWikiPage()  # Use scrapy item objects to more accurately follow established standards 
+                                # For more info, see the items.py file or the scrapy documentation
         
         page['url'] = str(response.url)
         page['pagetype'] = 'model'
@@ -204,7 +204,7 @@ class iGEMSpider(CrawlSpider):
             response (Response): the response given by the Scrapy request
 
         Yields:
-            WikiPage Item -> file (see initial documentation, items.py, pipelines.py):
+            SoftwareWikiPage Item -> file (see initial documentation, items.py, pipelines.py):
                     url (str): the url of the software/modelling page
                     pagetype (str): a string identifying if the page is a software or modelling page
                                     in order to help filter them down the line
@@ -213,7 +213,7 @@ class iGEMSpider(CrawlSpider):
                     pagetext (str): the body content of the wiki page (see getPagetext)
         '''
         page = SoftwareWikiPage()   # Use scrapy item objects to more accurately follow existing convention 
-                            # For more info, see the items.py file or review the scrapy documentation
+                                    # For more info, see the items.py file or review the scrapy documentation
         
         page['url'] = str(response.url)
         page['pagetype'] = 'software'
