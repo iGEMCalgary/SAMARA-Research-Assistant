@@ -1,11 +1,15 @@
-.preview {
-    color: #BCB502;
-}
-
-.preview-info {
-    color: #BCB502;
-}
-
 #maincontent {
-    background-color: blue;
+    background-color: #FEF4EC;
+    padding-top: 0.5em;
+    padding-right: 2em;
+    padding-left: 2em;
 }
+
+/* body {
+    background-color: #z;
+} */
+.listitem {
+    color: #000000;
+    background-color: #ffffff;
+}
+

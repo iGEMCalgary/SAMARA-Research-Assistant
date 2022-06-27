@@ -1,4 +1,5 @@
 {% load static %}
+{% load active_link_tags %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,7 +12,32 @@
 
 <body>
     <!-- navbar, header, stuff here -->
-    <div id="maincontent" class="custom-container">
+    <nav class="navbar navbar-dark navbar-expand-lg" style="background-color: #f69538;">
+        <div class="container-fluid">
+            <a class="navbar-brand " href="{% url 'homepage' %}">
+                <img src="{% static '/images/cellucoat-logo.png' %}" alt="" width="45" height="30" class="d-inline-block align-text-top">
+                SAMARA
+            </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'homepage' %}">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'software:software_list' %}">Software</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'model:model_list' %}">Modelling</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+    <div id="maincontent" class="container-fluid">
         {% block content %}
         {% endblock %}
     </div>
