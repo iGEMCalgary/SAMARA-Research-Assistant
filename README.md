@@ -7,8 +7,8 @@ The information is extracted using the scraper, summarized using the [DistilBART
 ## Installation
 
 1. Download the files from the repository
-2. Create a virtual environment and run the following commands from inside the virtual environment to install the required packages:
-`pip install torch --extra-index-url https://download.pytorch.org/whl/cu113`
+2. Create a virtual environment and run the following commands from inside the virtual environment to install the required packages:    
+`pip install torch --extra-index-url https://download.pytorch.org/whl/cu113`    
 `pip install -r requirements.txt`  
   
 A brief overview of the major packages installed and their usage in the program are listed below:
@@ -50,14 +50,18 @@ Item processing begins in the items.py file, with the defining of a DjangoItem W
 1. Create a new Django app for the page type you wish to scrape.
 2. Create a models.py file inside of the new app folder and define the model. The existing models.py files inside of the "software" and "model" folders may serve as good examples for model definitions.
 3. Define the items in the netscrape_nav/netscrape_nav/items.py file. Make sure to import the created models and to define each DjangoItem as terms of one (using the django_model variable).
+4. Create a scrapy rule (in netscrape_nav/netscrape_nav/spiders/iGEMScraper.py) to select pages that meet a criteria and define a function to call when an item is found.
+5. Create an Item instance inside of the function and pass to it the appropriate parameters.
 
-The second step involves post processing in the pipelines.py file. While some preliminary processing is done before creating a WikiPage Item (in netscrape_nav/netscrape_nav/iGEMScraper.py), we further process it here to remove unwanted characteristics from the scraped text. This file also contains the summarizer model, processing the pagetext into a useful summary. This step can be easily expanded on, with additional processing steps being a few lines of code away.
+The second step involves post processing in the pipelines.py file. While some preliminary processing is done before creating a WikiPage Item (in netscrape_nav/netscrape_nav/items.py), we further process it here to remove unwanted characteristics from the scraped text. This file contains the summarizer model, processing the pagetext into a (relatively) short, useful summary. This step can be easily expanded on, with additional processing steps being a few lines of code away.
   
 This step also includes the removal of default or unpopulated wiki pages, pages that do not follow standard iGEM convention, and other broken or otherwise unusable pages. 
 
 ### Exporting
   
 Exporting is also done through the pipelines.py file. By default, the scraper will use the JsonLinesItemExporter provided by Scrapy. This will export the pages as a .jl file. If changing the export format is desired or if the existing functionality is simply not enough, one may use the Scrapy [Item Exporters](https://docs.scrapy.org/en/latest/topics/exporters.html) and the [Item Pipeline](https://docs.scrapy.org/en/latest/topics/item-pipeline.html) docs to customize the functionality of the exporter. As part of the Djagno integration, the project also exports the files as an sqlite3 file. Functionality for using these files is built into Django, though you may use any SQL tool to process the data within it.
+
+The code is able to automatically construct 
   
 ## License
 The code is provided under the MIT license.
