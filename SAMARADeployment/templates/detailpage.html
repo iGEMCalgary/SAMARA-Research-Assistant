@@ -1,17 +1,18 @@
 {% extends 'frame.html' %}
 
 {% block content %}
-<h1>
-    Team: {{object.teamname}}
-</h1>
-
-<p>
-    {{object.pagetext}}
-</p>
-
-<p>
-    <a href="{{object.url}}">{{object.url}}</a>
-    {{object.pagetext}}
-</p>
+<div id="maincontent">
+    <h1>
+        Team: {{object.teamname}}
+    </h1>
+    
+    <p>
+        {{object.pagetext}}
+    </p>
+    
+    <p>
+        <a href="{{object.url}}">{{object.url}}</a>
+    </p>
+</div>
 
 {% endblock %}

@@ -5,11 +5,43 @@
     padding-left: 2em;
 }
 
-/* body {
-    background-color: #z;
-} */
+html, body {
+    height: 100%;
+  }
+
+.vh-90 {
+    min-height: 90vh !important;
+}
+
+
 .listitem {
     color: #000000;
     background-color: #ffffff;
 }
 
+.banner {
+    background-color: #f69538;
+    color: #ffffff;
+}
+
+.samara-home {
+    text-transform: uppercase;
+}
+
+.btn-outline-light {
+    color: #ffffff !important;
+    border-color: #ffffff !important;
+    /* !important to override bootstrap  */
+}
+
+.btn-outline-light:hover {
+    background-color: #f7aa5f !important;
+    /* !important to override bootstrap  */
+}
+
+.left-center-align {
+    left: 20%;
+    position: absolute;
+    top: 0%;
+    transform: translate(-20%, 30%);
+}
