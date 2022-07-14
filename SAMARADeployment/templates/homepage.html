@@ -2,16 +2,18 @@
 
 {% block content %}
 
-<div class="banner container-fluid vh-90">
-    <div class="row align-items-center d-flex flex-row vh-90">
-        <div class="col d-flex flex-column vh-90 justify-content-center align-items-center">
-            <h1 class="samara-home">Software<br>And<br>Model<br>Aggregating<br>Research<br>Assistant</h1>
+<div class="banner container-fluid">
+    <div class="row not-nav-height">
+        <div class="col-sm d-flex flex-column">
+            <div class="mx-auto my-auto">
+                <h1 class="samara-home"><b>S</b>oftware<br><b>A</b>nd<br><b>M</b>odelling<br><b>A</b>ggregating<br><b>R</b>esearch<br><b>A</b>ssistant</h1>
+                <p><b><i>A Cellucoat Project</i></b></p>
+            </div>
         </div>
-        <div class="col">
-            <div>
-                <a type="button" href="{% url 'software:software_list' %}" class="btn btn-block btn-outline-light">Explore Software</a>
-                <br>
-                <a type="button" href="{% url 'model:model_list' %}" class="btn btn-block btn-outline-light">Explore Modelling</a>
+        <div class="col-sm d-flex flex-column">
+            <div class="d-grid gap-4 col-6 homepage-button my-auto">
+                <a type="button" href="{% url 'software:software_list' %}" class="btn btn-outline-light"><b>Explore Software</b></a>
+                <a type="button" href="{% url 'model:model_list' %}" class="btn btn-outline-light"><b>Explore Modelling</b></a>
             </div>
             
         </div>

@@ -7,11 +7,32 @@
 
 html, body {
     height: 100%;
+    font-size: 16px;
   }
 
-.vh-90 {
-    min-height: 90vh !important;
+  /* Bootstrap 5 tweak: do not underline links unless hovered over */
+a:not([class*="btn"]) {
+    text-decoration: none;
 }
+a:not([class*="btn"]):hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 576px) {
+    .homepage-button {
+        margin-right: auto!important;
+        margin-left: auto!important;
+    }
+}
+
+.homepage-button {
+    margin-right: auto!important;
+}
+
+.not-nav-height {
+    min-height: calc(100vh - 59px) !important;
+}
+
 
 
 .listitem {
@@ -20,12 +41,26 @@ html, body {
 }
 
 .banner {
-    background-color: #f69538;
+    /* background-color: #f69538; */
     color: #ffffff;
+    background: radial-gradient(circle at 50% 100%, #F6953880 5%, #F69538 5% 10%, #F6953880 10% 15%, #F69538 15% 20%, #F6953880 20% 25%, #F69538 25% 30%, #F6953880 30% 35%, #F69538 35% 40%, transparent 40%), radial-gradient(circle at 100% 50%, #F6953880 5%, #F69538 5% 10%, #F6953880 10% 15%, #F69538 15% 20%, #F6953880 20% 25%, #F69538 25% 30%, #F6953880 30% 35%, #F69538 35% 40%, transparent 40%), radial-gradient(circle at 50% 0%, #F6953880 5%, #F69538 5% 10%, #F6953880 10% 15%, #F69538 15% 20%, #F6953880 20% 25%, #F69538 25% 30%, #F6953880 30% 35%, #F69538 35% 40%, transparent 40%), radial-gradient(circle at 0 50%, #F6953880 5%, #F69538 5% 10%, #F6953880 10% 15%, #F69538 15% 20%, #F6953880 20% 25%, #F69538 25% 30%, #F6953880 30% 35%, #F69538 35% 40%, transparent 40%);
+        background-size: 5em 5em;
+        background-color: #fabf88;
+        opacity: 0.9
 }
 
 .samara-home {
     text-transform: uppercase;
+    font-family: 'Barlow', sans-serif;
+    font-size: 3em;
+
+}
+
+.samara-home b {
+    font-weight: 8000;
+}
+.navbar-brand {
+    font-family: 'Barlow', sans-serif;
 }
 
 .btn-outline-light {
