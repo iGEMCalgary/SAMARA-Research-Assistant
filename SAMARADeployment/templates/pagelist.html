@@ -1,30 +1,34 @@
 {% extends 'frame.html' %}
 
 {% block content %}
-<!-- taken from  -->
-<div class="container-fluid">
-    {% for object in object_list %}
-        {% if forloop.first %}
+<!-- taken from 2018 Calgary's SARA Research Assistant  -->
+
+<div class="container-fluid banner">
+    <div class="container-fluid page-backdrop pt-3">
+        {% for object in object_list %}
+            {% if forloop.first %}
+            <div class="row">
+            {% endif %}
+            <div class="col-md-4">
+                <div class="container-fluid list-frame">
+                    <a href="/{{object.pagetype}}/{{object.id}}">
+                        <div class="list-item">
+                            <p class="preview"><span class="preview-title">{{object.year}} {{object.teamname}}</span></p>
+                            <!-- <div class="preview-info">{{object.description|truncatewords:20|slice:":-4"|safe}} . . .</div> -->
+                            <div class="preview-info">{{object.pagetext|truncatewords:20|safe}}</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        {% if forloop.counter|divisibleby:3 %}
+        </div>
+        <br>
         <div class="row">
         {% endif %}
-        <div class="col-md-4">
-            <a href="/{{object.pagetype}}/{{object.id}}">
-                <div class="col-12 square listitem">
-                    <p class="preview"><span class="preview-title">{{object.url}}</span></p>
-                    <!-- <div class="preview-info">{{object.description|truncatewords:20|slice:":-4"|safe}} . . .</div> -->
-                    <div class="preview-info">{{object.pagetext|truncatewords:20|safe}}</div>
-                    <div class="preview-info">{{object.teamname}}</div>
-                </div>
-            </a>
+        {% if forloop.last %}
         </div>
-    {% if forloop.counter|divisibleby:3 %}
+        {% endif %}
+    {% endfor %}
     </div>
-    <br>
-    <div class="row">
-    {% endif %}
-    {% if forloop.last %}
-    </div>  
-    {% endif %}
-{% endfor %}
 </div>
 {% endblock %}

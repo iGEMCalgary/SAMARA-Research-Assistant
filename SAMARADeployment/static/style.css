@@ -33,11 +33,14 @@ a:not([class*="btn"]):hover {
     min-height: calc(100vh - 59px) !important;
 }
 
-
-
-.listitem {
-    color: #000000;
+.list-frame {
     background-color: #ffffff;
+    padding: 15px;
+}
+
+.list-item {
+    
+    color: #000000;
 }
 
 .banner {
@@ -47,6 +50,11 @@ a:not([class*="btn"]):hover {
         background-size: 5em 5em;
         background-color: #fabf88;
         opacity: 0.9
+}
+
+.page-backdrop {
+    background-color: #f8f1ec;
+    width: 90%;
 }
 
 .samara-home {
