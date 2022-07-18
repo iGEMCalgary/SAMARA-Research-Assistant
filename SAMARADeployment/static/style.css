@@ -33,13 +33,14 @@ a:not([class*="btn"]):hover {
     min-height: calc(100vh - 59px) !important;
 }
 
-.list-frame {
+/* .list-frame {
     background-color: #ffffff;
-    padding: 15px;
-}
+} */
 
 .list-item {
-    
+    background-color: white;
+    height: 100%;
+    padding: 10px;
     color: #000000;
 }
 

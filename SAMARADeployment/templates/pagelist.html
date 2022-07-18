@@ -9,10 +9,10 @@
             {% if forloop.first %}
             <div class="row">
             {% endif %}
-            <div class="col-md-4">
-                <div class="container-fluid list-frame">
+            <div class="col-md-4 list-frame">
+                <div class="container-fluid list-item">
                     <a href="/{{object.pagetype}}/{{object.id}}">
-                        <div class="list-item">
+                        <div class="">
                             <p class="preview"><span class="preview-title">{{object.year}} {{object.teamname}}</span></p>
                             <!-- <div class="preview-info">{{object.description|truncatewords:20|slice:":-4"|safe}} . . .</div> -->
                             <div class="preview-info">{{object.pagetext|truncatewords:20|safe}}</div>
