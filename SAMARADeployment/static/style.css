@@ -44,6 +44,14 @@ a:not([class*="btn"]):hover {
     color: #000000;
 }
 
+.list-item-title {
+    color: #000000;
+}
+
+/* .list-item-info {
+
+} */
+
 .banner {
     /* background-color: #f69538; */
     color: #ffffff;
